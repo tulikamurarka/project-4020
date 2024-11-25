@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>ChatGPT Accuracy Visualization</title>
+    <!-- <link rel="stylesheet" type="text/css" href="stylesheet.css"> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+  </head>
+
+  <body>
+
+    <!-- <div class = "container" style="position: relative; height:80vh; width:160vw">
+      <canvas id="myChart"></canvas>
+    </div> -->
+
+    <h1 style="font-size: 2.5rem;
+    color: #0056b3;
+    margin-top: 20px;
+    margin-bottom: 20px; text-align: center;"> <%= model %> Model Evaluation on the domain of History, Social Science, and Computer Security</h1>
+
+    <div class = "container" style="position: relative;
+    height: 80vh;
+    width: 80vw;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;">
+      <canvas id="accuracyChart"></canvas>
+    </div>
+    <div class = "validation" style="font-weight: 700;
+    font-size: 1.3rem;
+    color: #0056b3;
+    margin-bottom: 10px;text-align: center;">
+    <h1>Validation Results</h1>
+    <p>History: <%= historyCorrect %> / 50 = <%= Number(historyCorrect/50 * 100) %> % </p>
+    <p>Social Science: <%= socialScienceCorrect %> / 50 = <%= Number(socialScienceCorrect/50).toFixed(2) * 100 %> % </p>
+    <p>Computer Security: <%= computerSecurityCorrect %> / 50 = <%= Number(computerSecurityCorrect/50).toFixed(2) * 100 %> % </p>
+    <p>Total Correct: <%= totalCorrect %> / 150 = <%= Number(totalCorrect/150 * 100).toFixed(2) %> %</p>
+
+  </div>
+    <div class = "container" style="position: relative;
+    height: 80vh;
+    width: 80vw;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;">
+      <canvas id="avgResponseTimeChart"></canvas>
+    </div>
+    <div class = "average" style="font-weight: 700;
+    font-size: 1.3rem;
+    color: #0056b3;
+    margin-bottom: 10px;text-align: center;">
+    <h1>Average Response Time</h1>
+    <p>History: <%= averageResponseTimeForHistoryCollection %> ms</p>
+    <p>Social Science: <%= averageResponseTimeForSocialScienceCollection %> ms</p>
+    <p>Computer Security: <%= averageResponseTimeForComputerSecurityCollection %> ms</p>    
+
+
+   
+    </div> 
+
+    <script>
+      // Accuracy
+      const historyCorrect = Number('<%= historyCorrect %>');
+      const socialScienceCorrect = Number('<%= socialScienceCorrect %>');
+      const computerSecurityCorrect = Number('<%= computerSecurityCorrect %>');
+
+      Chart.defaults.font.family = 'Lato';
+      Chart.defaults.font.size = 40;
+
+      let accuracyChart = document.getElementById('accuracyChart');
+
+      let accuracyBarChart = new Chart(accuracyChart, {
+        type: 'bar',
+        data: {
+          labels:['History', 'Social Science', 'Computer Security'],
+          datasets:[{
+            label: 'Accuracy',
+            data: [
+              historyCorrect, socialScienceCorrect, computerSecurityCorrect
+            ],
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+            ],
+            borderWidth: 4,
+            borderColor: [
+              'rgb(255, 99, 132)',
+              'rgb(75, 192, 192)',
+              'rgb(54, 162, 235)',
+            ],
+            hoverBorderColor: '#000',
+          },
+          
+        ]
+        },
+          options:{
+            plugins:{
+              title:{
+                display: true,
+                text: 'ChatGPT Response Accuracy on Various Domain',
+                fontSize: 40,
+              },
+              legend:{
+                display: false,
+              }
+            }
+          },
+          
+        
+      })
+
+      // Average Response Time
+      const socialScienceAvgResponseTime = Number('<%= averageResponseTimeForSocialScienceCollection %>');
+      const historyAvgResponseTime = Number('<%= averageResponseTimeForHistoryCollection %>');
+      const computerSecurityAvgResponseTime = Number('<%= averageResponseTimeForComputerSecurityCollection %>');
+
+      let avgResponseTimeChart = document.getElementById('avgResponseTimeChart');
+
+      let avgResponseTimeBar = new Chart(avgResponseTimeChart, {
+        type: 'bar',
+        data: {
+          labels:['History', 'Social Science', 'Computer Security'],
+          datasets:[{
+            label: 'Average Response Time',
+            data: [
+            historyAvgResponseTime, socialScienceAvgResponseTime, computerSecurityAvgResponseTime
+            ],
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+            ],
+            borderWidth: 4,
+            borderColor: [
+              'rgb(255, 99, 132)',
+              'rgb(75, 192, 192)',
+              'rgb(54, 162, 235)',
+            ],
+            hoverBorderColor: '#000',
+          }]
+        },
+          options:{
+            plugins:{
+              title:{
+                display: true,
+                text: 'ChatGPT Average Response Time on Various Domain',
+                fontSize: 25,
+              },
+              legend:{
+                display: false,
+              }
+            }
+          }
+        
+      })
+    </script>
+    
+
+
+  </body>
+
+</html>
