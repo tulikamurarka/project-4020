@@ -1,0 +1,354 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>ChatGPT Efficiency Evaluation</title>
+    <meta name="author" content="Alyssa">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/images/favicon/favicon.ico" type="image/x-icon">
+    
+    <style>
+
+.container, .intro-section, .profile-section, .results-section, .section {
+  max-width: 900px;
+  width: 100%;
+  margin: 20px auto; 
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.intro-section, .results-section, .profile-section, .section {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.intro-section {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.intro-section h1 {
+  font-size: 2.5rem;
+  color: #0056b3;
+  margin-bottom: 20px;
+}
+
+.intro-section p {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+.profile-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.profile-text {
+  max-width: 60%;
+}
+
+.profile-text h2 {
+  font-size: 2rem;
+  color: #0056b3;
+  margin-bottom: 10px;
+}
+
+.profile-text p {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+.profile-image {
+  max-width: 50%;
+  text-align: center;
+}
+
+.profile-image img {
+  width: 350px;
+  height: 250px;
+  border-radius: 50%;
+  border: 3px solid #ddd;
+}
+
+.section {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.section h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #0056b3;
+}
+
+.section p {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  text-align: justify;
+}
+
+.results-section h2 {
+  font-size: 2rem;
+  color: #0056b3;
+  margin-bottom: 15px;
+}
+
+.results-section p {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.results-section select,
+.results-section button {
+  font-size: 1rem;
+  padding: 10px 15px;
+  margin: 10px 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.results-section button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.results-section button:hover {
+  background-color: #1a547a;
+}
+
+.questions-section {
+  background-color: #f1f8ff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.questions-label {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.questions-select {
+  width: 30%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: #fff;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.questions-button {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.questions-button:hover {
+  background-color: #1a547a;
+}
+
+.questions-description {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  margin-top: 15px;
+}
+body {
+  background-image: url('/images/bg.webp'); 
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+@media (max-width: 768px) {
+  .questions-section, .results-section {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+/* Container for the highlight box */
+.highlight-box {
+  background-color: #EAF5FF; /* Light blue background */
+  border: 1px solid #A0C4FF; /* Border with a slightly darker blue */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px; /* Space inside the box */
+  margin: 15px 0; /* Space outside the box */
+ 
+  
+}
+
+
+
+    </style>
+  </head>
+
+  <body>
+    <section class="intro-section">
+      <h1>Welcome to ChatGPT Efficiency Evaluation</h1>
+      <p>
+          This project evaluates ChatGPT's performance across various domains by integrating 
+          advanced web development techniques. Using MongoDB, Node.js, and the ChatGPT API, 
+          the project explores how AI can efficiently answer domain-specific queries. Results 
+          are visualized on this platform for a comprehensive analysis.
+      </p>
+    </section>
+
+    <section class="profile-section">
+      <!-- Profile Text -->
+      <div class="profile-text">
+          <h2>Alyssa Lake</h2>
+          <p>Hi! I'm Alyssa, a student at York University in Toronto. I have a keen interest in technology and web development.</p>
+          <p class="tech-background">
+              My technical expertise includes working with MongoDB, Node.js, and the ChatGPT API to build robust, data-driven applications. 
+              I love combining my knowledge of databases, APIs, and web technologies to create meaningful projects.
+          </p>
+          <p>
+              <a href="https://www.threads.net/">Threads</a> / <a href="https://blueskyweb.xyz/">Bluesky</a> / <a href="https://twitter.com/">Twitter</a> / <a href="https://github.com/"">Github</a>
+          </p>
+      </div>
+      <!-- Profile Image -->
+      <div class="profile-image">
+          <img src="/images/alyssa.jpg" alt="Alyssa Lake">
+      </div>
+    </section>
+
+    
+      <!-- Research Approach Section -->
+      <section class="section">
+          <h2>Research Approach</h2>
+          <p>
+              This project evaluates ChatGPT's efficiency by leveraging advanced web technologies. 
+              Our setup integrates powerful tools such as:
+          </p>
+          <div class="highlight-box">
+              <ul>
+                  <li><a href="https://www.mongodb.com/" target="_blank">MongoDB</a>: For data storage and management.</li>
+                  <li><a href="https://nodejs.org/" target="_blank">Node.js</a>: For server-side scripting and API handling.</li>
+                  <li><a href="https://platform.openai.com/docs/" target="_blank">ChatGPT API</a>: For evaluating ChatGPT's response quality in various scenarios.</li>
+              </ul>
+          </div>
+          <p>
+              These technologies allow us to design a robust, data-driven evaluation process that tests ChatGPT’s ability to handle 
+              diverse queries and contexts effectively.
+          </p>
+      </section>
+
+      <!-- Dataset Overview Section -->
+      <section class="section">
+          <h2>Dataset Overview</h2>
+          <p>
+              The dataset used in this evaluation consists of a diverse set of questions spanning three key domains:
+          </p>
+          <div class="highlight-box">
+              <ul>
+                  <li><b>History</b>: To test factual recall and reasoning about past events.</li>
+                  <li><b>Social Science</b>: To evaluate ChatGPT's understanding of societal concepts and theories.</li>
+                  <li><b>Computer Security</b>: To assess technical expertise in a specialized field.</li>
+              </ul>
+          </div>
+
+          <label for="collection-select"class="questions-label">Choose a collection to retrieve questions:</label>
+          <select id="collection-select">
+            <option value="SocialScience">Social Science</option>
+            <option value="History">History</option>
+            <option value="ComputerSecurity">Computer Security</option>
+            <option value="all">All</option>
+          </select>
+          <button type="button" id="fetch-questions"class="questions-button">Fetch Questions</button>
+
+          <p class="questions-description">
+            Each domain was selected to ensure a comprehensive analysis of ChatGPT’s strengths and limitations, 
+            providing insights into its performance across both general and technical areas.
+          </p>
+      </section>
+
+      <!-- Results Section -->
+      
+    <div class="results-section">
+        <h2>Results</h2>
+        <p>
+            The results section will present visualizations and metrics showcasing ChatGPT's performance in each domain. 
+            These charts and graphs will highlight areas of strength, improvement opportunities, and comparative accuracy 
+            across the selected fields.
+        </p>
+        <div class="highlight-box">
+        <label for="model-select">Choose a model:</label>
+        <select id="model-select">
+            <option value="4o">4o</option>
+            <option value="4o-mini">4o-mini</option>
+        </select>
+        <button type="button" id="fetch-button" aria-label="Fetch data and process">Fetch Data and Process</button>
+    
+        <br>
+    
+        <button type="button" id="validate-button">View Results</button>
+        <br>
+    
+    
+    
+        </div>
+       </div>
+    
+    <script>
+      let isDataFetched = false;
+
+      document.getElementById("fetch-button").addEventListener("click", () => {
+          const modelSelect = document.getElementById("model-select");
+          const selectedModel = modelSelect.value;
+          const collection = "all";
+          isDataFetched = true;
+
+          const url = `/processQuestions/all/${selectedModel}`;
+          window.open(url, '_blank');
+          console.log("Data fetched and processed.");
+      })
+
+      document.getElementById("validate-button").addEventListener("click", () => {
+        if (!isDataFetched) {
+              alert("Please process the data first by clicking 'Fetch Data and Process'!");
+        } else {
+              window.location.href = "/validate/Responses";
+        }
+      });
+
+      document.getElementById("fetch-questions").addEventListener("click", () => {
+          const collectionSelect = document.getElementById("collection-select");
+          const selectedCollection = collectionSelect.value;
+
+          const url = `/retrieveQuestions/${selectedCollection}`;
+          window.open(url, '_blank');
+          console.log("Redirecting to fetch questions...");
+      })
+    </script>
+
+  </body>
+</html>
