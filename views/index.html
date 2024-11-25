@@ -8,7 +8,7 @@
     <meta name="author" content="Alyssa">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="/images/favicon/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/server/public/stylesheet.css">
     
   </head>
 
@@ -38,11 +38,10 @@
     </div>
     <!-- Profile Image -->
     <div class="profile-image">
-        <img src="/images/alyssa.jpg" alt="Alyssa Lake">
+        <img src="/server/images/alyssa.jpg" alt="Alyssa Lake">
     </div>
-</section>
+   </section>
 
-<div class="container">
   <!-- Research Approach Section -->
   <section class="section">
       <h2>Research Approach</h2>
@@ -76,50 +75,49 @@
               <li><b>Computer Security</b>: To assess technical expertise in a specialized field.</li>
           </ul>
       </div>
-
-      <label for="collection-select" style="font-size: 24px">Choose a collection to retrieve questions:</label>
-      <select id="collection-select">
-        <option value="SocialScience">Social Science</option>
-        <option value="History">History</option>
-        <option value="ComputerSecurity">Computer Security</option>
-        <option value="all">All</option>
-      </select>
-      <button type="button" id="fetch-questions">Fetch Questions</button>
-
-      <p>
+      <section class="questions-section">
+        <label for="collection-select" class="questions-label">Choose a collection to retrieve questions:</label>
+        <select id="collection-select" class="questions-select">
+          <option value="SocialScience">Social Science</option>
+          <option value="History">History</option>
+          <option value="ComputerSecurity">Computer Security</option>
+          <option value="all">All</option>
+        </select>
+        <button type="button" id="fetch-questions" class="questions-button">Fetch Questions</button>
+        <p class="questions-description">
           Each domain was selected to ensure a comprehensive analysis of ChatGPT’s strengths and limitations, 
           providing insights into its performance across both general and technical areas.
-      </p>
-  </section>
-
-
+        </p>
+      </section>
+    </section>
+    </div>      
 
   <!-- Results Section -->
-  <section class="section">
+  
+    <div class="results-section">
     <h2>Results</h2>
     <p>
         The results section will present visualizations and metrics showcasing ChatGPT's performance in each domain. 
         These charts and graphs will highlight areas of strength, improvement opportunities, and comparative accuracy 
         across the selected fields.
     </p>
-
-    <label for="model-select" style="font-size: 24px">Choose a model:</label>
+    <div class="highlight">
+    <label for="model-select">Choose a model:</label>
     <select id="model-select">
         <option value="4o">4o</option>
         <option value="4o-mini">4o-mini</option>
     </select>
-    <button type="button" id="fetch-button">Fetch Data and Process</button>
+    <button type="button" id="fetch-button" aria-label="Fetch data and process">Fetch Data and Process</button>
+
     <br>
 
     <button type="button" id="validate-button">View Results</button>
     <br>
 
 
-    <!-- <div class="placeholder">
-        <b>Visualizations Coming Soon</b><br>
-        Graphs and performance metrics will be displayed here in Part 2.
-    </div> -->
-  </section>
+
+    </div>
+   </div>
 
   <script>
 
@@ -152,47 +150,9 @@
       }
     });
 
-
-    document.getElementById("fetch-questions").addEventListener("click", () => {
-        const collectionSelect = document.getElementById("collection-select");
-        const selectedCollection = collectionSelect.value;
-
-        // Construct the URL
-        const url = `/retrieveQuestions/${selectedCollection}`;
-
-        // Redirect to the dynamically constructed URL
-        window.open(url, '_blank');
-
-        console.log("Redirecting to fetch questions...");
-    })
-
-    
-
     </script>
 
-</div>
 
-
-  <!-- <section class="profile-section">
-    <img src="path-to-your-image.jpg" alt="Alyssa Lake">
-    <h2>Alyssa Lake</h2>
-    <p>Hi! I'm Alyssa, a student at York University in Toronto. I have a keen interest in technology and web development.</p>
-    <p class="tech-background">
-        My technical expertise includes working with MongoDB, Node.js, and the ChatGPT API to build robust, data-driven applications. I love combining my knowledge of databases, APIs, and web technologies to create meaningful projects.
-    </p>
-    <tr style="padding:0px">
-      <td style="padding:2.5%;width:63%;vertical-align:middle">
-        
-        <p style="text-align:center">
-         
-  <a href="https://www.threads.net/@jonbarron">Threads</a> &nbsp;/&nbsp;
-  <a href="https://bsky.app/profile/jonbarron.bsky.social">Bluesky</a> &nbsp;/&nbsp;
-          <a href="https://twitter.com/jon_barron">Twitter</a> &nbsp;/&nbsp;
-          <a href="https://github.com/jonbarron/">Github</a>
-        </p>
-      
-    </tr>
-</section> -->
 
   </body>
 </html>
