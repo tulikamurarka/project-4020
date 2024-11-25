@@ -76,11 +76,23 @@
               <li><b>Computer Security</b>: To assess technical expertise in a specialized field.</li>
           </ul>
       </div>
+
+      <label for="collection-select" style="font-size: 24px">Choose a collection to retrieve questions:</label>
+      <select id="collection-select">
+        <option value="SocialScience">Social Science</option>
+        <option value="History">History</option>
+        <option value="ComputerSecurity">Computer Security</option>
+        <option value="all">All</option>
+      </select>
+      <button type="button" id="fetch-questions">Fetch Questions</button>
+
       <p>
           Each domain was selected to ensure a comprehensive analysis of ChatGPT’s strengths and limitations, 
           providing insights into its performance across both general and technical areas.
       </p>
   </section>
+
+
 
   <!-- Results Section -->
   <section class="section">
@@ -91,7 +103,7 @@
         across the selected fields.
     </p>
 
-    <label for="model-select" style="font-size: 20px">Choose a model:</label>
+    <label for="model-select" style="font-size: 24px">Choose a model:</label>
     <select id="model-select">
         <option value="4o">4o</option>
         <option value="4o-mini">4o-mini</option>
@@ -139,6 +151,22 @@
             window.location.href = "/validate/Responses";
       }
     });
+
+
+    document.getElementById("fetch-questions").addEventListener("click", () => {
+        const collectionSelect = document.getElementById("collection-select");
+        const selectedCollection = collectionSelect.value;
+
+        // Construct the URL
+        const url = `/retrieveQuestions/${selectedCollection}`;
+
+        // Redirect to the dynamically constructed URL
+        window.open(url, '_blank');
+
+        console.log("Redirecting to fetch questions...");
+    })
+
+    
 
     </script>
 
