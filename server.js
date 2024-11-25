@@ -46,62 +46,51 @@ const ComputerSecurity = require('./models/computer_Security');
 
 
 app.get('/retrieveQuestions/:collection', async (req, res) => {
-
     var collection = req.params.collection;
 
     try {
+        let questions = [];
+
         switch (collection.toLowerCase()) {
-            
-            // Retrieve questions from collection Social_Science
+            // Retrieve questions from collection Social Science
             case "socialscience":
-                SocialScience.find({}, 'question -_id')
-                    .then((result) => {
-                        res.send(result);
-                    })
-                break;
-            
-            // Retrieve questions from collection History
-            case "history":
-                History.find({}, 'question -_id')
-                    .then((result) => {
-                        res.send(result);
-                    })
+                questions = await SocialScience.find({}, 'question -_id');
                 break;
 
-            // Retrieve questions from collection Computer_Security
-            case "computersecurity":
-                ComputerSecurity.find({}, 'question -_id')
-                    .then((result) => {
-                        res.send(result);
-                    })
+            // Retrieve questions from collection History
+            case "history":
+                questions = await History.find({}, 'question -_id');
                 break;
-            
-            //Retrieve ALL questions of the Database
+
+            // Retrieve questions from collection Computer Security
+            case "computersecurity":
+                questions = await ComputerSecurity.find({}, 'question -_id');
+                break;
+
+            // Retrieve ALL questions of the Database
             case "all":
                 const [socialScienceQuestions, historyQuestions, computerSecurityQuestions] = await Promise.all([
                     SocialScience.find({}, 'question -_id'),
                     History.find({}, 'question -_id'),
                     ComputerSecurity.find({}, 'question -_id')
                 ]);
-                const allQuestions = {
-                    SocialScience: socialScienceQuestions,
-                    History: historyQuestions,
-                    ComputerSecurity: computerSecurityQuestions
-                };
-                // Send a single response
-                res.status(200).json(allQuestions);
+                questions = [
+                    ...socialScienceQuestions.map(q => ({ question: q.question })),
+                    ...historyQuestions.map(q => ({ question: q.question })),
+                    ...computerSecurityQuestions.map(q => ({ question: q.question })),
+                ];
                 break;
 
             default:
                 return res.status(400).send({ error: "Invalid collection name." });
         }
-    }
-    catch (error) {
+
+        res.render('question', { questions });
+    } catch (error) {
         console.error("Error retrieving questions:", error);
         res.status(500).send({ error: "Failed to retrieve questions." });
     }
-
-})
+});
 
 var averageResponseTimeForSocialScienceCollection;
 var averageResponseTimeForHistoryCollection;
